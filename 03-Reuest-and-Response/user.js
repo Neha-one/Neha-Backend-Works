@@ -8,7 +8,6 @@ const server = http.createServer((req, res) => {
 
 
   if (req.url === '/') {
-
     res.write('<html>')
     res.write('<head><title>Backend development</title></head>')
     res.write('<body>')
