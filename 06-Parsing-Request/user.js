@@ -47,20 +47,21 @@ const userRequestHandler = (req, res) => {
       //--------------method 02----------------
       const bodyObject = Object.fromEntries(params);
       console.log(bodyObject);
-      fs.writeFileSync("user.txt", JSON.stringify(bodyObject));
+      fs.writeFile("user.txt", JSON.stringify(bodyObject), error => {
+        console.log("Data written successfully.");
+        res.statusCode = 302;
+        res.setHeader('Location', '/');
+        return res.end();
+      });
     })
-
-
-    res.statusCode = 302;
-    res.setHeader('Location', '/');
-    return res.end();
   }
-
-  res.write('<html>')
-  res.write('<head><title>Backend development</title></head>')
-  res.write('<body><h1>other pages........</h1></body>')
-  res.write('</html>')
-  res.end();
+  else {
+    res.write('<html>')
+    res.write('<head><title>Backend development</title></head>')
+    res.write('<body><h1>other pages........</h1></body>')
+    res.write('</html>')
+    res.end();
+  }
 }
 
 module.exports = userRequestHandler;
