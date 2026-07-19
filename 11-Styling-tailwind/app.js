@@ -11,6 +11,9 @@ const userRouter = require('./routes/user')
 const rootDir = require('./utils/pathUtil')
 
 const app = express();
+// app.use(express.static(path.join(rootDir, 'public')))
+//-----OR---------EASY--------
+app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded());
 
