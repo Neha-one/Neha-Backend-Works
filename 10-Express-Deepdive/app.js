@@ -1,46 +1,25 @@
+//External module
 const express = require('express');
 const bodyParser = require('body-parser')
+
+//Core moduel
+const path = require('path')
+
+//Local module
+const contactRouter = require('./routes/contactUs')
+const userRouter = require('./routes/user')
+const rootDir = require('./utils/pathUtil')
+
 const app = express();
 
-app.use((req, res, next) => {
-  console.log("URL: ", req.url)
-  next();
-})
-
-app.use((req, res, next) => {
-  console.log("METHOD: ", req.method)
-  next();
-})
-
-app.get("/", (req, res) => {
-  console.log('this is 3rd middleware');
-  res.send(`
-    <h2>click on Go on Contact to contact us</h2>
-    <a a href = "/contact-us" >Go on Contact</a >`)
-})
-
-app.get("/contact-us", (req, res, next) => {
-  console.log('sending form');
-  res.send(`
-    <h2>please enter your details</h2>
-      <form action="/contact-us" method="POST">
-      <input  type="text" placeholder="enter name"  name="name"/>
-  <input type="email" placeholder="enter email" name="email"/>
-  <button type="submit">Submit</button>
-  </form>
-`)
-})
-
-//--this will not print because bodyparse use after this.-----------
-app.post("/contact-us", (req, res, next) => {
-  console.log(req.body);
-  next();
-})
 app.use(bodyParser.urlencoded());
 
-app.post("/contact-us", (req, res, next) => {
-  console.log(req.body);
-  res.send('we wil contact you shortly');
+app.use(userRouter)
+app.use(contactRouter)
+
+
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(rootDir, 'views', '404.html'))
 })
 
 const PORT = 3000;
