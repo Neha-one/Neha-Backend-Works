@@ -11,9 +11,13 @@ const bodyParser = require('body-parser')
 const rootDir = require('./utils/path')
 
 const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', 'views')
+
 app.use(express.urlencoded());
-app.use(exress.static("public")
-)
+// app.use(express.static("public"))
+app.use(express.static(path.join(rootDir, 'public')))
 app.use(userRouter);
 app.use("/host", hostRouter);
 
