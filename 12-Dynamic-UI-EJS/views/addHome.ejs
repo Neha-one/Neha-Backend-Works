@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/head') %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Home</title>
-  <link rel="stylesheet" href="/output.css" />
 </head>
 
 <body>
+  <%- include('partials/navbar') %>
   <main class="container mx-auto mt-8 p-8 bg-white-400 rounded-lg shadow-[-1px_7px_4px_0px_rgba(0,0,0,0.3)] text-center">
     <h1 class="text-black-500 font-bold text-3xl ">Register your home here on airbnb</h1>
 
   <form action="/host/add-home" method="POST" class="max-w-md mx-auto mt-3 p-4 bg-white rounded-lg shadow-md">
-    <input type="text" placeholder="enter your housename here" name="housename" />
+    <input type="text" placeholder="enter your housename here" name="houseName" />
     <button type="submit">Submit</button>
   </form>
   </main>

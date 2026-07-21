@@ -23,7 +23,7 @@ app.use("/host", hostRouter);
 
 // error handling 404------
 app.use((req, res, next) => {
-  res.status(404).render('404', { PageTitle: "page not found" })
+  res.status(404).render('404', { PageTitle: "page not found", currentPage: '404' })
 })
 const PORT = 3000;
 app.listen(PORT, () => {

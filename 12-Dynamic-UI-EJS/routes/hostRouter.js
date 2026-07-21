@@ -5,20 +5,21 @@ const path = require('path')
 const express = require('express')
 
 //Local module
-const rootDir = require('../utils/path')
-
 const hostRouter = express.Router();
 
 
 hostRouter.get('/add-home', (req, res, next) => {
-  res.sendFile(path.join(rootDir, 'views', 'addHome.html'))
+  res.render('addHome', { PageTitle: 'Add Home'})
 })
 
+
+const registeredHomes = [];
 hostRouter.post('/add-home', (req, res, next) => {
-  // res.send(req.body)
-  console.log(req.body);
-  res.sendFile(path.join(rootDir, 'views', 'HomeAdded.html'))
+  registeredHomes.push({ houseName: req.body.houseName})
+  console.log(req.body.houseName);
+  res.render('HomeAdded', { PageTitle: 'home registered successfully' })
 })
 
 
-module.exports = hostRouter;
+exports.hostRouter = hostRouter;
+exports.registeredHomes = registeredHomes;

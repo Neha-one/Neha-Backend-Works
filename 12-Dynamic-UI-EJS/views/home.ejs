@@ -1,0 +1,23 @@
+<%- include('partials/head') %>
+
+</head>
+
+<body>
+  <%- include('partials/navbar') %>
+    <header
+      class="background-white p-8 text-center bg-white w-fit flex justify-center items-center mx-auto mt-8 rounded-lg shadow-[-1px_7px_4px_0px_rgba(0,0,0,0.3)]">
+      <h1 class="text-black font-bold font-sans">
+        here is our registred homes:
+      </h1>
+      <ul>
+        <% registeredHomes.forEach(home=> { %>
+          <li class="text-black-300   ">
+            <%= home.houseName %>
+          </li>
+          <% }); %>
+      </ul>
+    </header>
+
+</body>
+
+</html>
