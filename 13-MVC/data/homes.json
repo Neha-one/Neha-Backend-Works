@@ -1,1 +1,23 @@
-[{"houseImage":"anviVilla.jpg","houseName":"adfdf","houseLocation":"Lucknow","housePrice":"2","houseRating":"2"}]
+[
+  {
+    "houseImage": "anviVilla.jpg",
+    "houseName": "adfdf",
+    "houseLocation": "dg",
+    "housePrice": "0000",
+    "houseRating": "9"
+  },
+  {
+    "houseImage": "anviVilla.jpg",
+    "houseName": "kanshaj villa",
+    "houseLocation": "asd",
+    "housePrice": "7",
+    "houseRating": "5"
+  },
+  {
+    "houseImage": "anviVilla.jpg",
+    "houseName": "anvi villa",
+    "houseLocation": "Lucknow",
+    "housePrice": "11111111111111",
+    "houseRating": "1"
+  }
+]
