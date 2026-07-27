@@ -19,5 +19,19 @@
     "houseLocation": "Lucknow",
     "housePrice": "11111111111111",
     "houseRating": "1"
+  },
+  {
+    "houseImage": "https://r.search.yahoo.com/_ylt=Awrx.L7H22FqqgIAEgC7HAx.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3Nj/RV=2/RE=1786007751/RO=10/RU=https%3a%2f%2fwww.pinterest.com%2fpin%2fmodern-twostory-house-with-balconies--389983649000351353%2f/RK=2/RS=.GOYYDjglGNv7EMPaX.KISkSgEA-",
+    "houseName": "kanshaj villa",
+    "houseLocation": "Lucknow",
+    "housePrice": "55555555",
+    "houseRating": "5"
+  },
+  {
+    "houseImage": "https://imgs.search.brave.com/uvpwU5K_vKhct38wkk2GB7h6Z9QxfAeVz2ycJ-3PO2k/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aGVj/YXZlbmRlcmRpYXJ5/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxOC8wOS9jb3Vy/dHlhcmQtb2YtdGhl/LWhvdXNlLXRoYXQt/cGludGVyZXN0LWJ1/aWx0LmpwZz93PTEw/MDA",
+    "houseName": "kanshaj villa",
+    "houseLocation": "Lucknow",
+    "housePrice": "55555555",
+    "houseRating": "5"
   }
 ]

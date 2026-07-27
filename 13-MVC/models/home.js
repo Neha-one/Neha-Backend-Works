@@ -7,6 +7,7 @@ const rootDir = require('../utils/path');
 // let registeredHomes = [];
 
 module.exports = class Home {
+  //which properties it will take :--- 5 you can see;
   constructor(houseImage, houseName, houseLocation, housePrice, houseRating) {
     this.houseImage = houseImage;
     this.houseName = houseName;

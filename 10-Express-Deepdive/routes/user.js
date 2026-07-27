@@ -10,7 +10,7 @@ const rootDir = require('../utils/pathUtil')
 const userRouter = express.Router();
 
 userRouter.get("/", (req, res) => {
-  res.sendFile(path.join(rootDir, 'views', 'home.html'))
+  res.sendFile(path.join(rootDir, 'views', 'Home.html'))
 })
 
 module.exports = userRouter;
