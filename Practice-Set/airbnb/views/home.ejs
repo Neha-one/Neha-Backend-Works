@@ -1,0 +1,34 @@
+<%- include('partials/head') %>
+
+  <body>
+    <%- include('partials/navbar') %>
+
+      <header>
+        <h1>Welcome to airbnb</h1>
+      </header>
+      <main>
+
+        <ul>
+          <% registeredHomes.forEach(home=>{ %>
+            <li>
+              <img src="/images/<%= home.houseImage %>" alt="houseImage">
+
+            </li>
+            <li>
+              <%= home.houseName %>
+            </li>
+            <li>
+              <%= home.housePrice %>
+            </li>
+            <li>
+              <%= home.houseRating %>
+            </li>
+            <li>
+              <%= home.houseLocation %>
+            </li>
+            <% }) %>
+        </ul>
+      </main>
+  </body>
+
+  </html>

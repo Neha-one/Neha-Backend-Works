@@ -1,0 +1,71 @@
+.navbar {
+  margin-top: 0;
+  padding: 11px;
+  background-color: rgb(221, 85, 108);
+}
+
+.navbar ul {
+  display: flex;
+  gap: 22px;
+}
+
+.navbar .navli {
+  list-style: none;
+}
+
+.navli a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  border: 2px solid black;
+  padding: 15px;
+  width: 70vw;
+}
+
+.form input,
+.form button {
+  width: 80%;
+  font-size: 15px;
+  padding: 15px;
+}
+
+.form input {
+  border: 2px solid palevioletred;
+}
+
+.form button {
+  width: auto;
+  background-color: rgb(255, 117, 140);
+  color: white;
+  border: 2px solid pink;
+  font-weight: bold;
+}
+
+.addhomediv {
+  display: flex;
+  justify-content: center;
+}
+.addhomeli{
+  list-style: none;
+}
+.addhomeli a {
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  border: 2px solid palevioletred;
+  background-color: rgb(248, 86, 113);
+  padding: 9px;
+
+}
+.addhomeheader{
+display: flex;
+justify-content: center;
+}
