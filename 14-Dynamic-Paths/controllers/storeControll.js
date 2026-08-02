@@ -30,3 +30,23 @@ exports.getFavorite = (req, res) => {
     })
   })
 }
+exports.getSkillDetails = (req, res) => {
+  const skillId = req.params.skillId;
+  Skill.findById(skillId, skill => {
+    if (!skill) {
+      console.log("skill not found");
+      res.redirect("/home")
+    }
+    else {
+      console.log("skill details found", skill);
+      res.render("store/skill-details", { pageTitle: "Home", skill: skill });
+    }
+  })
+};
+
+exports.postFavorite = (req, res) => {
+  console.log("came to favorite", req.body);
+  // const skillId = req.body.skillId;
+  // console.log("favorite with id: ", skillId);
+  res.redirect("/favorite");
+}

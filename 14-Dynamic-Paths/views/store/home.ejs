@@ -1,7 +1,6 @@
 <%- include('../partials/head') %>
 
   <body>
-    <h1 style="color:red">NEHA TEST</h1>
     <%- include('../partials/navbar') %>
       <main class="min-h-screen bg-gray-100 py-10">
         <div class="max-w-6xl mx-auto px-6">
@@ -28,7 +27,7 @@
                     <!-- Skill logo -->
                     <div class="h-40 bg-gray-200 flex items-center justify-center">
                       <% if (skill.skillLogo) { %>
-                        <img src="images/<%= skill.skillLogo %>" alt="<%= skill.skillName %> logo"
+                        <img src="<%= skill.skillLogo %>" alt="<%= skill.skillName %> logo"
                           class="h-full w-full object-cover" onerror="this.style.display='none'" />
                         <% } else { %>
                           <span class="text-gray-400 text-sm">No logo</span>
@@ -53,13 +52,12 @@
                           </span>
                         </p>
                       </div>
-                      <a href="/home<%= skill.id  %>"
-                        class="bg-blue-300 text-black p-2 mt-2 rounded hover:bg-blue-600 transition-colors duration-200">Details</a>
+                      <div class="flex gap-4 mt-3">
+                        <a href="/home/<%= skill.id  %>"
+                          class="bg-blue-300 text-black p-3  rounded hover:bg-blue-600 transition-colors duration-200">Details</a>
 
-                      <button
-                        class="bg-green-300 text-black p-2 mt-2 rounded hover:bg-green-600 transition-colors duration-200">
-                        Book
-                      </button>
+                        <%- include('../partials/favorite',{skill:skill}) %>
+                      </div>
                     </div>
                   </div>
                   <% }) %>
