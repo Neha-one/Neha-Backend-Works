@@ -1,0 +1,72 @@
+<%- include('../partials/head') %>
+
+  <body>
+    <%- include('../partials/navbar') %>
+      <main class="min-h-screen bg-gray-100 py-10">
+        <div class="max-w-6xl mx-auto px-6">
+          <!-- Page header -->
+          <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Your Skills</h1>
+            <p class="text-gray-500 mt-2">Hey host! here your skills 
+            </p>
+          </div>
+          <% if (addedSkillList.length===0) { %>
+            <!-- Empty state -->
+            <div class="bg-white rounded-xl shadow-lg p-12 text-center">
+              <p class="text-gray-500 text-lg mb-6">No skills added yet.</p>
+              <a href="/add-skill"
+                class="inline-block bg-rose-500 hover:bg-rose-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+                Add Your First Skill
+              </a>
+            </div>
+            <% } else { %>
+              <!-- Skills grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% addedSkillList.forEach((skill)=> { %>
+                  <div
+                    class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200">
+                    <!-- Skill logo -->
+                    <div class="h-40 bg-gray-200 flex items-center justify-center">
+                      <% if (skill.skillLogo) { %>
+                        <img src="images/<%= skill.skillLogo %>" alt="<%= skill.skillName %> logo"
+                          class="h-full w-full object-cover" onerror="this.style.display='none'" />
+                        <% } else { %>
+                          <span class="text-gray-400 text-sm">No logo</span>
+                          <% } %>
+                    </div>
+                    <!-- Skill details -->
+                    <div class="p-5">
+                      <h2 class="text-xl font-bold text-gray-900 mb-3">
+                        <%= skill.skillName %>
+                      </h2>
+                      <div class="space-y-2 text-sm text-gray-600">
+                        <p class="flex items-center gap-2">
+                          <span class="font-medium text-gray-700">Time:</span>
+                          <%= skill.timeTaken || 'Not specified' %>
+                        </p>
+                        <p class="flex items-center gap-2">
+                          <span class="font-medium text-gray-700">Rating:</span>
+                          <span class="text-yellow-400">
+                            <% for (let i=1; i <=5; i++) { %>
+                              <%= i <=skill.rating ? '★' : '☆' %>
+                                <% } %>
+                          </span>
+                        </p>
+                      </div>
+                      <button class="bg-blue-500 text-black p-2 mt-2 rounded hover:bg-blue-600 transition-colors duration-200">
+                        Edit
+                      </button>
+                      <button class="bg-red-500 text-black p-2 mt-2 rounded hover:bg-red-600 transition-colors duration-200">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                  <% }) %>
+              </div>
+              <% } %>
+        </div>
+        
+      </main>
+  </body>
+
+  </html>
