@@ -6,8 +6,8 @@ exports.getData = (req, res) => {
 }
 
 exports.postData = (req, res) => {
-  const { skillLogo, skillName, timeTaken, rating } = req.body;
-  const home = new Skill(skillLogo, skillName, timeTaken, rating);
+  const { skillLogo, skillName, timeTaken, rating ,description} = req.body;
+  const home = new Skill(skillLogo, skillName, timeTaken, rating, description);
   home.save();
 
   res.redirect("/skill-added");
@@ -17,9 +17,8 @@ exports.addedSkills = (req, res) => {
   res.render("host/skill-added", { pageTitle: "Skill added" })
 }
 
-
 exports.getHostHome = (req, res) => {
-  Skill.fetchAll(addedSkillList => {
+  Skill.fetchAll().then(([addedSkillList]) => {
     res.render("host/host-home", {
       pageTitle: "host skill list",
       addedSkillList: addedSkillList,

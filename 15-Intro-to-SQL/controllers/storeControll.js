@@ -2,15 +2,19 @@ const express = require('express');
 const Skill = require('../model/home');
 
 exports.getIndex = (req, res) => {
-  Skill.fetchAll(addedSkillList => {
+  Skill.fetchAll().then(([addedSkillList]) => {
     res.render("store/index", {
       pageTitle: "Skill Home",
       addedSkillList: addedSkillList,
     })
-  })
+    console.log("reslut is here", addedSkillList)
+  }).catch((error) => {
+    console.log("error generate", error);
+  });
 }
+
 exports.getHome = (req, res) => {
-  Skill.fetchAll(addedSkillList => {
+  Skill.fetchAll().then(([addedSkillList]) => {
     res.render("store/home", {
       pageTitle: "skills list",
       addedSkillList: addedSkillList,
@@ -23,7 +27,7 @@ exports.getBooking = (req, res) => {
 }
 
 exports.getFavorite = (req, res) => {
-  Skill.fetchAll(addedSkillList => {
+  Skill.fetchAll().then(([addedSkillList]) => {
     res.render("store/favorite", {
       pageTitle: "Favorite",
       addedSkillList: addedSkillList,

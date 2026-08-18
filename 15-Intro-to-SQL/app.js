@@ -2,15 +2,9 @@ const express = require('express')
 const bodyparser = require('body-parser');
 const { homeRouter } = require('./routes/store');
 const { hostRouter } = require('./routes/host');
-const db = require('./utils/database');
-const app = express();
 
-db.execute("SELECT * FROM homes")
-  .then(([rows,feilds]) => {
-    console.log("here are our testing database result:", rows);
-  }).catch((error) => {
-    console.log("error while testing db connecton", error);
-})
+
+const app = express();
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
