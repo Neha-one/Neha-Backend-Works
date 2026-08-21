@@ -1,0 +1,62 @@
+<%- include('../partials/head') %>
+
+  <body>
+    <%- include('../partials/navbar') %>
+
+      <main class="min-h-screen bg-gray-100 py-10">
+
+        <h1 class="text-4xl font-bold text-center text-red-500 mb-10">
+          Details of Skill
+        </h1>
+
+        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6">
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Left -->
+            <div>
+              <img src="<%= skill.skillLogo %>" alt="<%= skill.skillName %>"
+                class="w-full h-96 object-contain rounded-lg">
+            </div>
+
+            <!-- Right -->
+            <div class="space-y-6">
+
+              <div class="border-b pb-4">
+                <h2 class="text-2xl font-bold">Skill Name</h2>
+                <p class="text-gray-600 mt-2">
+                  <%= skill.skillName %>
+                </p>
+              </div>
+
+              <div class="border-b pb-4">
+                <h2 class="text-2xl font-bold">Time Taken</h2>
+                <p class="text-gray-600 mt-2">
+                  <%= skill.timeTaken %>
+                </p>
+              </div>
+
+              <div class="border-b pb-4">
+                <h2 class="text-2xl font-bold">Rating</h2>
+
+                <p class="text-yellow-500 text-2xl mt-2">
+                  <% for(let i=1;i<=5;i++){ %>
+                    <%= i <=skill.rating ? "★" : "☆" %>
+                      <% } %>
+                </p>
+              </div>
+
+              <div class="flex gap-4 mt-6">
+
+                <a href="/home" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
+                  Back
+                </a>
+                <%- include('../partials/favorite') %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+  </body>
+
+  </html>
