@@ -1,10 +1,10 @@
 const express = require('express');
 const Home = require('../model/home');
+const Favorite = require('../model/favorite');
 
 exports.getIndex = (req, res) => {
   Home.fetchAll(addedHome => {
     res.render("store/index", { addedHome: addedHome, pageTitle: "index" });
-
   })
 }
 exports.getHome = (req, res) => {
@@ -29,11 +29,35 @@ exports.getBooking = (req, res) => {
   res.render("store/booking", { pageTitle: "booking" });
 }
 exports.getFavorite = (req, res) => {
-  res.render("store/booking", { pageTitle: "booking" });
+  Favorite.getFavorite((favorites) => {
+    Home.fetchAll((addedHome) => {
+      // const FavHome = favorites.map(homeId => addedHome.find(home => home.id === homeId));
+      const FavHome = addedHome.filter(home => favorites.includes(home.id))
+      res.render("store/favorite", { favorites: FavHome, pageTitle: "favorite" });
+    })
+  })
+
 }
 
 exports.postAddFavorite = (req, res) => {
-  const FavId = req.body;
-  console.log(FavId);
-  res.redirect("/favorite");
+  const homeId = req.body.id;
+  const removeId = req.body.RemoveId;
+  if (removeId) {
+
+    Favorite.RemoveFromFavorites(removeId, err => {
+      if (err) {
+        console.log("Error while removing favorite: ", err);
+      }
+      res.redirect("/favorite");
+    });
+  }
+  else {
+    Favorite.addToFavorite(homeId, err => {
+      if (err) {
+        console.log("Error while marking favorites: ", err);
+      }
+      res.redirect("/favorite");
+    })
+  }
+  
 }

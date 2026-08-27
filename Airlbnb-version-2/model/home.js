@@ -46,4 +46,4 @@ module.exports = class Home {
       callback(houseFound);
     })
   }
-
+};

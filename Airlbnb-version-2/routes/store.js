@@ -9,6 +9,4 @@ storeRouter.get("/booking", storeController.getBooking)
 storeRouter.get("/favorite", storeController.getFavorite)
 storeRouter.post("/favorite", storeController.postAddFavorite)
 
-
-
 module.exports = { storeRouter };
