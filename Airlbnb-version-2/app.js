@@ -1,11 +1,15 @@
 const express = require('express');
-const { storeRoute } = require("./routes/store");
+const bodyparser = require('body-parser');
+const { storeRouter } = require("./routes/store");
+const { hostRouter } = require("./routes/host");
 
 const app = express();
-
+app.use(express.urlencoded());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-app.use(storeRoute);
+
+app.use(storeRouter);
+app.use(hostRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => {

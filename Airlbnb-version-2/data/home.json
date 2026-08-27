@@ -1,0 +1,34 @@
+[
+  {
+    "imageURL": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d",
+    "homeName": "df",
+    "homePrice": "345",
+    "location": "3fg",
+    "rating": "4",
+    "id": "277"
+  },
+  {
+    "imageURL": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea",
+    "homeName": "df",
+    "homePrice": "345",
+    "location": "3fg",
+    "rating": "3",
+    "id": "189"
+  },
+  {
+    "imageURL": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
+    "homeName": "adff",
+    "homePrice": "34545345",
+    "location": "dfg",
+    "rating": "5",
+    "id": "330"
+  },
+  {
+    "imageURL": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+    "homeName": "g67",
+    "homePrice": "67",
+    "location": "dh",
+    "rating": "3",
+    "id": "291"
+  }
+]
