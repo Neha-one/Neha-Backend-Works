@@ -1,38 +1,39 @@
 <nav class="bg-gray-900 text-white shadow-md">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-    <h2 class="text-xl font-bold tracking-wide text-rose-400"> <a href="/">airbnb</a></h2>
+    <h2 class="text-xl font-bold tracking-wide text-rose-400"> <a href="/">stayNest</a></h2>
 
     <ul class="flex items-center gap-6 list-none m-0 p-0">
       <li>
 
-        <a href="/" class="hover:text-rose-400 transition-colors duration-200 font-medium">
-          airbnb
+        <a href="/"   class="<%= pageTitle === 'index' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
+          stayNest
         </a>
       </li>
       <li>
 
-        <a href="/home" class="hover:text-rose-400 transition-colors duration-200 font-medium">
+        <a href="/home"
+          class="<%= pageTitle === 'home' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
           Home
         </a>
       </li>
 
       <li>
-        <a href="/booking" class="hover:text-rose-400 transition-colors duration-200 font-medium">
+        <a href="/booking"   class="<%= pageTitle === 'booking' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
           Booking
         </a>
       </li>
       <li>
-        <a href="/favorite" class="hover:text-rose-400 transition-colors duration-200 font-medium">
+        <a href="/favorite"   class="<%= pageTitle === 'favorite' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
           Favorite
         </a>
       </li>
       <li>
-        <a href="/add-home" class="hover:text-rose-400 transition-colors duration-200 font-medium">
+        <a href="/add-home"   class="<%= pageTitle === 'add-home' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
           Add home
         </a>
       </li>
       <li>
-        <a href="/host-home" class="hover:text-rose-400 transition-colors duration-200 font-medium">
+        <a href="/host-home"   class="<%= pageTitle === 'host-home' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
           Host Home
         </a>
       </li>
