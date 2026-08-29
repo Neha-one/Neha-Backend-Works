@@ -8,12 +8,12 @@
 
       <main class="max-w-7xl mx-auto mt-10 px-6">
         <h1 class="text-4xl font-bold text-gray-800 text-center mb-10">
-          Registered Homes
+          Favorite marked Homes
         </h1>
 
         <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          <% addedHome.forEach(home=> { %>
+          <% favorites.forEach(home=> { %>
 
             <li class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
 
@@ -50,21 +50,15 @@
                       / night
                     </span>
                   </div>
-                
                   <div>
-                    <a href="/host/edit-home/<%=home.id%>?editing=true"
-                      class="inline-block w-fit bg-blue-500 hover:bg-blue-600 text-white px-2 py-2 rounded-lg font-medium transition box-sizing: border-box;">
-                      Edit
-                    </a>
-                    <form action="/host/delete-home/<%=home.id%>" method="POST">
-                      <button type="submit"
-                        class="inline-block w-fit bg-red-500 hover:bg-red-600 text-white px-2 py-2 rounded-lg font-medium transition box-sizing: border-box;">
-                        Delete
-                      </button>
-                    </form>
+                    <form action="/favorite" method="POST">
 
+                      <button type="submit">Remove</button>
+                      <input type="hidden" value="<%= home.id %>" name="RemoveId">
+                    </form>
                   </div>
-                </div>
+                </div> 
+
               </div>
 
             </li>

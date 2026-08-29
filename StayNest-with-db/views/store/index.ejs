@@ -50,21 +50,16 @@
                       / night
                     </span>
                   </div>
-                
                   <div>
-                    <a href="/host/edit-home/<%=home.id%>?editing=true"
-                      class="inline-block w-fit bg-blue-500 hover:bg-blue-600 text-white px-2 py-2 rounded-lg font-medium transition box-sizing: border-box;">
-                      Edit
-                    </a>
-                    <form action="/host/delete-home/<%=home.id%>" method="POST">
-                      <button type="submit"
-                        class="inline-block w-fit bg-red-500 hover:bg-red-600 text-white px-2 py-2 rounded-lg font-medium transition box-sizing: border-box;">
-                        Delete
-                      </button>
-                    </form>
 
+
+                    <a href="/favorite/<%= home.id %>"
+                      class="inline-block w-fit bg-red-500 hover:bg-red-600 text-white px-2 py-2 rounded-lg font-medium transition box-sizing: border-box;">
+                      Favorite
+                    </a>
                   </div>
                 </div>
+
               </div>
 
             </li>
