@@ -1,0 +1,71 @@
+<%- include('../partials/head') %>
+
+  <body class="bg-gray-100">
+
+    <%- include('../partials/navbar') %>
+
+      <main class="max-w-5xl mx-auto px-4 py-10">
+
+        <!-- Details Card -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+          <!-- Image -->
+          <div class="flex justify-center">
+            <img src="<%= house.imageURL %>" alt="<%= house.homeName %>"
+              class="w-[500px] h-[300px] object-cover rounded-2xl shadow-md m-5">
+          </div>
+          <!-- Property Details -->
+          <div class="p-8">
+
+            <!-- Home Name -->
+            <h1 class="text-4xl font-bold text-gray-800 mb-6">
+              <%= house.homeName %>
+            </h1>
+
+            <!-- Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+              <!-- Price -->
+              <div class="bg-gray-50 rounded-xl p-5">
+                <p class="text-sm text-gray-500 mb-1">Price</p>
+                <p class="text-2xl font-bold text-red-500">
+                  ₹<%= house.homePrice %>
+                </p>
+              </div>
+
+              <!-- Location -->
+              <div class="bg-gray-50 rounded-xl p-5">
+                <p class="text-sm text-gray-500 mb-1">Location</p>
+                <p class="text-lg font-semibold text-gray-800">
+                  <%= house.location %>
+                </p>
+              </div>
+
+              <!-- Rating -->
+              <div class="bg-gray-50 rounded-xl p-5">
+                <p class="text-sm text-gray-500 mb-1">Rating</p>
+                <p class="text-lg font-semibold text-gray-800">
+                  ⭐ <%= house.rating %>
+                </p>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-5">
+                <p class="text-sm text-gray-500 mb-1">Description</p>
+                <p class="text-lg font-semibold text-gray-800">
+                   <%= house.description %>
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+            <!-- Back -->
+            <%- include('../partials/fav', {home: house}) %>
+          </div>
+
+      </main>
+
+  </body>
+
+  </html>
