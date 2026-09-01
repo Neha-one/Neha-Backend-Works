@@ -1,0 +1,62 @@
+<nav class="bg-gray-900 text-white shadow-md">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <h2 class="text-xl font-bold tracking-wide text-rose-400"> <a href="/">stayNest</a></h2>
+
+    <ul class="flex items-center gap-6 list-none m-0 p-0">
+
+      <li>
+        <a href="/"
+          class="<%= currentPage === 'index' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
+          stayNest
+        </a>
+      </li>
+      <% if(isLoggedIn) {%>
+        <li>
+          <a href="/home"
+            class="<%= currentPage === 'home' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a href="/booking"
+            class="<%= currentPage === 'booking' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
+            Booking
+          </a>
+        </li>
+        <li>
+          <a href="/favorite"
+            class="<%= currentPage === 'Favourite' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
+            Favourite
+          </a>
+        </li>
+        <li>
+          <a href="/host/add-home"
+            class="<%= currentPage === 'add-home' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
+            Add home
+          </a>
+        </li>
+        <li>
+          <a href="/host/host-home"
+            class="<%= currentPage === 'host-home' ? 'bg-gray-700' : 'hover:bg-gray-700' %> transition duration-300 py-2 px-4 rounded font-medium">
+            Host Home
+          </a>
+        </li>
+
+        <% } %>
+          <% if(!isLoggedIn) { %>
+            <li>
+              <a href="/login"
+                class="bg-blue-700 hover:bg-blue-700 transition duration-300 py-2 px-4 rounded font-medium">
+                Login
+              </a>
+            </li>
+            <% } else{ %>
+              <form action="/logout" method="POST">
+                <button class="bg-red-700 hover:bg-red-700 transition duration-300 py-2 px-4 rounded font-medium"
+                  type="submit">logout</button>
+              </form>
+              <% } %>
+    </ul>
+  </div>
+</nav>
