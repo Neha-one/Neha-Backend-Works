@@ -7,24 +7,26 @@ exports.getAddHome = (req, res) => {
 
 
 exports.getHostHome = (req, res, next) => {
-  Home.fetchAll().then(addedHome => {
+  Home.find().then(addedHome => {
     res.render("host/host-home", { addedHome: addedHome, pageTitle: "host-home", currentPage: "host-home" });
   });
 };
 
 exports.postAddHome = (req, res) => {
   const { imageURL,
-    homeName,
-    homePrice,
+    houseName,
+    housePrice,
     location,
     rating,
     description
   } = req.body;
-  const home = new Home(imageURL,
-    homeName,
-    homePrice,
+  const home = new Home({
+    imageURL,
+    houseName,
+    housePrice,
     location,
     rating, description
+  }
   );
 
   home.save().then(() => {
@@ -52,28 +54,34 @@ exports.getEditHome = (req, res) => {
 }
 exports.postEditHome = (req, res) => {
   const { imageURL,
-    homeName,
-    homePrice,
+    houseName,
+    housePrice,
     location,
     rating, description, id
   } = req.body;
-  const home = new Home(imageURL,
-    homeName,
-    homePrice,
-    location,
-    rating, description, id
-  );
-  home.save().then(() => {
+  Home.findById(id).then((home) => {
+    if (!home) {
+      return res.redirect("/host-home");
+    }
+    home.imageURL = imageURL;
+    home.houseName = houseName;
+    home.housePrice = housePrice;
+    home.location = location;
+    home.rating = rating;
+    home.description = description;
+    return home.save();
+  }).then((result) => {
+    console.log("Home updated ", result);
     res.redirect('/host-home');
-  }).catch((error) => {
-    console.log("Error adding home", error)
-  });
+  }).catch(err => {
+    console.log("Error while updating", err);
+  })
 }
 
 exports.postDeleteHome = (req, res) => {
   const homeId = req.params.homeId;
   console.log("Deleting ID:", homeId);
-  Home.DeleteById(homeId).then((result) => {
+  Home.findByIdAndDelete(homeId).then((result) => {
     console.log(result);
     res.redirect('/host-home')
   }).catch((err) => {

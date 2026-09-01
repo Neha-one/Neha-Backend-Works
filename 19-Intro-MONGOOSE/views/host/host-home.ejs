@@ -19,7 +19,7 @@
 
               <!-- Image -->
               <div class="h-56 overflow-hidden">
-                <img src="<%= home.imageURL %>" alt="<%= home.homeName %>"
+                <img src="<%= home.imageURL %>" alt="<%= home.houseName %>"
                   class="w-full h-full object-cover hover:scale-105 transition duration-500">
               </div>
 
@@ -28,7 +28,7 @@
 
                 <div class="flex justify-between items-start mb-2">
                   <h2 class="text-xl font-bold text-gray-800">
-                    <%= home.homeName %>
+                    <%= home.houseName %>
                   </h2>
 
                   <span class="text-sm bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
@@ -44,13 +44,13 @@
 
                   <div>
                     <span class="text-2xl font-bold text-gray-800">
-                      ₹<%= home.homePrice %>
+                      ₹<%= home.housePrice %>
                     </span>
                     <span class="text-gray-500">
                       / night
                     </span>
                   </div>
-                
+
                   <div>
                     <a href="/host/edit-home/<%=home._id%>?editing=true"
                       class="inline-block w-fit bg-blue-500 hover:bg-blue-600 text-white px-2 py-2 rounded-lg font-medium transition box-sizing: border-box;">

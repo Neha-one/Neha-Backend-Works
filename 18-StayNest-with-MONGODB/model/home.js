@@ -3,30 +3,35 @@ const { getDB } = require('../utils/database');
 
 module.exports = class Home {
   constructor(imageURL, homeName, homePrice, location, rating, description, _id) {
-    (this.imageURL = imageURL,
-      this.homeName = homeName,
-      this.homePrice = homePrice,
-      this.location = location,
-      this.rating = rating,
-      this.description = description,
-      this._id = _id);
+    this.imageURL = imageURL;
+    this.homeName = homeName;
+    this.homePrice = homePrice;
+    this.location = location;
+    this.rating = rating;
+    this.description = description;
+    if (_id) {
+      this._id = _id;
+    }
   }
 
   save() {
     const db = getDB();
-    return db.collection('home').insertOne(this);
+    if (this._id) {
+      const updateFields = {
+        imageURL: this.imageURL,
+        homeName: this.homeName,
+        homePrice: this.homePrice,
+        location: this.location,
+        rating: this.rating,
+        description: this.description
+      }
+      return db.collection('home').updateOne({ _id: new ObjectId(String(this._id)) }, { $set: updateFields })
 
+    }
+    else {
+      return db.collection('home').insertOne(this);
 
-    // if (this.id) {
-    //   return db.execute("UPDATE `property-details` SET imageURL=?, homeName=?, homePrice=?, location=?, rating=?,description=? WHERE id=?",
-    //     [this.imageURL, this.homeName, this.homePrice, this.location, this.rating, this.description, this.id]
-    //   );
-    // }
-    // else {
-    //   return db.execute("INSERT INTO `property-details`(imageURL, homeName, homePrice, location, rating,description) VALUES(?,?,?,?,?,?)",
-    //     [this.imageURL, this.homeName, this.homePrice, this.location, this.rating, this.description]
-    //   );
-    // }
+    }
   }
 
   static fetchAll() {
@@ -37,11 +42,13 @@ module.exports = class Home {
 
   static findById(homeId) {
     const db = getDB();
-    return db.collection('home').find( { _id: new ObjectId(String(homeId)) }).next();
-    // return db.execute('SELECT * FROM `property-details` WHERE id=?', [homeId]);
+    return db.collection('home').find({ _id: new ObjectId(String(homeId)) }).next();
   }
 
   static DeleteById(homeId) {
-    // return db.execute('DELETE FROM `property-details` WHERE id=?', [homeId]);
+    const db = getDB();
+    return db.collection('home').deleteOne({
+      _id: new ObjectId(homeId)
+    });
   }
 }; 
