@@ -1,0 +1,29 @@
+<nav class="bg-gray-900 text-white px-8 py-4 shadow-lg">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+
+    <h1 class="text-2xl font-bold text-rose-400">
+      AuthPractice
+    </h1>
+
+    <ul class="flex items-center gap-6">
+      <li>
+        <a href="/" class="bg-rose-500 hover:bg-rose-600 px-5 py-2 rounded-lg font-medium transition">
+          Home
+        </a>
+      </li>
+      <% if (!isLoggedIn) { %>
+        <li>
+          <a href="/login" class="bg-rose-500 hover:bg-rose-600 px-5 py-2 rounded-lg font-medium transition">
+            Login
+          </a>
+        </li>
+
+        <% } else { %>
+
+          <form action="/logout" method="POST">
+            <button type="submit">Logout</button>
+          </form>
+          <% } %>
+    </ul>
+  </div>
+</nav>
