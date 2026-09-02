@@ -1,0 +1,123 @@
+<%- include('../partials/head') %>
+
+  <body>
+    <%- include('../partials/navbar') %>
+
+      <main class="min-h-screen bg-slate-100 px-4 py-10 sm:px-6 lg:px-8">
+        <div
+          class="mx-auto grid max-w-5xl overflow-hidden rounded-3xl bg-white shadow-2xl shadow-slate-300/50 lg:grid-cols-[0.85fr_1.15fr]">
+          <section class="relative overflow-hidden bg-slate-900 px-8 py-10 text-white sm:px-12 lg:px-10 lg:py-14">
+            <div class="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-rose-500/20"></div>
+            <div class="absolute -bottom-20 -left-16 h-56 w-56 rounded-full border-[28px] border-amber-300/10"></div>
+            <div class="relative flex h-full flex-col justify-between gap-12">
+              <div>
+                <p class="mb-6 text-sm font-semibold uppercase tracking-[0.25em] text-rose-300">stayNest</p>
+                <h1 class="max-w-sm text-4xl font-bold leading-tight tracking-tight sm:text-5xl">Make room for more
+                  memorable stays.</h1>
+                <p class="mt-5 max-w-sm text-base leading-7 text-slate-300">Find a place that feels like yours, or open
+                  your own door to travelers from everywhere.</p>
+              </div>
+              <div class="border-l-2 border-rose-400 pl-5">
+                <p class="text-lg font-medium text-slate-100">“The best trips begin with the right welcome.”</p>
+                <p class="mt-2 text-sm text-slate-400">Your next chapter starts here.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="px-6 py-8 sm:px-12 sm:py-12">
+            <div class="mb-8">
+              <p class="text-sm font-semibold uppercase tracking-widest text-rose-500">Create your account</p>
+              <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900">Welcome to stayNest</h2>
+              <p class="mt-2 text-sm text-slate-500">A few details and you’re ready to go.</p>
+            </div>
+
+            <form action="/signup" method="POST" class="space-y-5">
+
+              <% if (typeof errorsMessages !='undefined' && errorsMessages && errorsMessages.length>0) { %>
+                <div class="grid gap-5 sm:grid-cols-2">
+                  <div class="col-span-2 mb-3 border-l-4 border-red-500 bg-red-50 p-4 text-sm text-red-700" role="alert">
+                    <ul class="list-disc list-inside text-sm text-red-500">
+                      <% errorsMessages.forEach(error=> { %>
+                        <li>
+                          <%= error%>
+                        </li>
+                        <% }); %>
+                    </ul>
+                  </div>
+                  <%}%>
+                    <div>
+                      <label for="firstName" class="mb-2 block text-sm font-semibold text-slate-700">First name</label>
+                      <input id="firstName" type="text" placeholder="Neha" required name="firstName"
+                        autocomplete="given-name" value="<%= oldInput.firstName ? oldInput.firstName : "" %>"
+                        class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-rose-400 focus:bg-white focus:ring-4 focus:ring-rose-100" />
+                    </div>
+                    <div>
+                      <label for="lastName" class="mb-2 block text-sm font-semibold text-slate-700">Last name</label>
+                      <input id="lastName" type="text" placeholder="Baranwal" name="lastName" autocomplete="family-name" value="<%= oldInput.lastName ? oldInput.lastName : "" %>"
+                        class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-rose-400 focus:bg-white focus:ring-4 focus:ring-rose-100" />
+                    </div>
+                </div>
+
+                <div>
+                  <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">Email address</label>
+                  <input id="email" type="email" placeholder="you@example.com" required name="email"
+                    autocomplete="email" value="<%= oldInput.email ? oldInput.email : "" %>"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-rose-400 focus:bg-white focus:ring-4 focus:ring-rose-100" />
+                </div>
+
+                <div class="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label for="password" class="mb-2 block text-sm font-semibold text-slate-700">Password</label>
+                    <input id="password" type="password" placeholder="Create a password" required name="password"
+                      autocomplete="new-password"
+                      class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-rose-400 focus:bg-white focus:ring-4 focus:ring-rose-100" />
+                  </div>
+                  <div>
+                    <label for="confirmPassword" class="mb-2 block text-sm font-semibold text-slate-700">Confirm
+                      password</label>
+                    <input id="confirmPassword" type="password" placeholder="Repeat password" required
+                      name="confirmpassword" autocomplete="new-password"
+                      class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-rose-400 focus:bg-white focus:ring-4 focus:ring-rose-100" />
+                  </div>
+                </div>
+
+                <fieldset>
+                  <legend class="mb-3 text-sm font-semibold text-slate-700">I want to join as a</legend>
+                  <div class="grid gap-3 sm:grid-cols-2">
+                    <label
+                      class="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-200 p-3 transition hover:border-rose-300 has-[:checked]:border-rose-400 has-[:checked]:bg-rose-50">
+                      <input type="radio" name="userType" value="guest" required class="h-4 w-4 accent-rose-500" checked="<% oldInput.userType === 'guest' %>" />
+                      <span><strong class="block text-sm text-slate-800">Guest</strong><small
+                          class="text-xs text-slate-500">Discover a place to stay</small></span>
+                    </label>
+                    <label
+                      class="flex cursor-pointer items-center gap-3 rounded-xl border border-slate-200 p-3 transition hover:border-rose-300 has-[:checked]:border-rose-400 has-[:checked]:bg-rose-50 ">
+                      <input type="radio" name="userType" value="host" class="h-4 w-4 accent-rose-500" checked="<% oldInput.userType === 'host' %>"/>
+                      <span><strong class="block text-sm text-slate-800">Host</strong><small
+                          class="text-xs text-slate-500">Share your space</small></span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <label class="flex items-start gap-3 text-sm text-slate-600 mt-3 mb-5">
+                  <input type="checkbox" name="terms" required
+                    class="mt-0.5 h-4 w-4 rounded accent-rose-500" />
+                  <span>I accept the <a href="#" class="font-semibold text-rose-500 hover:text-rose-600">terms and
+                      conditions</a>.</span>
+                </label>
+                
+
+                <button type="submit"
+                  class="w-full rounded-xl bg-rose-500 py-3.5 font-semibold text-white shadow-lg shadow-rose-200 transition hover:bg-rose-600 hover:shadow-rose-300 focus:outline-none focus:ring-4 focus:ring-rose-200">
+                  Create my account
+                </button>
+                <p class="text-center text-sm text-slate-500">Already have an account? <a href="/login"
+                    class="font-semibold text-rose-500 hover:text-rose-600">Log in</a></p>
+            </form>
+        </div>
+        </section>
+        </div>
+      </main>
+  </body>
+
+  </html>
