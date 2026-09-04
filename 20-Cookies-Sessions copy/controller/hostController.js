@@ -2,13 +2,13 @@ const express = require('express');
 const Home = require('../model/home');
 
 exports.getAddHome = (req, res) => {
-  res.render("host/edit-home", { pageTitle: "add-home", currentPage: "add-home", editing: false, isLoggedIn: req.isLoggedIn, user: req.session.user });
+  res.render("host/edit-home", { pageTitle: "add-home", currentPage: "add-home", editing: false, isLoggedIn: req.isLoggedIn });
 }
 
 
 exports.getHostHome = (req, res, next) => {
   Home.find().then(addedHome => {
-    res.render("host/host-home", { addedHome: addedHome, pageTitle: "host-home", currentPage: "host-home", isLoggedIn: req.isLoggedIn, user: req.session.user });
+    res.render("host/host-home", { addedHome: addedHome, pageTitle: "host-home", currentPage: "host-home", isLoggedIn: req.isLoggedIn });
   });
 };
 
@@ -48,7 +48,7 @@ exports.getEditHome = (req, res) => {
       return res.redirect("/host/host-home");
     }
     else {
-      res.render("host/edit-home", { home: home, editing: editing, pageTitle: "Edit Page", currentPage: "host-home", isLoggedIn: req.isLoggedIn, user: req.session.user });
+      res.render("host/edit-home", { home: home, editing: editing, pageTitle: "Edit Page", currentPage: "host-home", isLoggedIn: req.isLoggedIn });
     }
   })
 }

@@ -1,0 +1,60 @@
+<%- include('../partials/head') %>
+
+  <body>
+    <%- include('../partials/navbar') %>
+
+      <main class="min-h-screen bg-gray-100 py-10">
+        <div class="max-w-xl mx-auto px-6">
+          <div class="bg-white rounded-xl shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">
+              Register as a new user
+            </h1>
+            <form action="/signup" method="POST" class="space-y-6">
+
+    <%- include('../partials/errors') %>
+
+                  <input type="text" placeholder="Enter First Name" required name="firstName"
+                    value="<%= oldInput.firstName ? oldInput.firstName : '' %>"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent" />
+
+
+                  <input type="text" placeholder="Enter Last Name" name="lastName"
+                    value="<%= oldInput.lastName ? oldInput.lastName : '' %>"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent" />
+
+                  <input type="email" placeholder="Enter your email" required name="email"
+                    value="<%= oldInput.email ? oldInput.email : '' %>"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent" />
+
+                  <input type="password" placeholder="Enter your password" required name="password"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent" />
+
+                  <input type="password" placeholder="Confirm your password" required name="confirmpassword"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent" />
+
+                  <label>
+                    <input type="radio" required name="userType" value="guest" <%=oldInput.userType==='guest' ? 'checked'
+                      : '' %>
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2
+                    focus:ring-rose-400 focus:border-transparent" />
+                    <span>Guest</span></label>
+                  <label>
+                    <input type="radio" required name="userType" value="host"<%=oldInput.userType==='host' ? 'checked'
+                      : '' %>
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2
+                    focus:ring-rose-400 focus:border-transparent" />
+                    <span>Host</span> </label>
+                  <br>
+                  <input type="checkbox" name="terms" id="terms" required />
+                  <label for="terms">terms and conditions</label>
+                  <button type="submit"
+                    class="w-full bg-rose-500 hover:bg-rose-600 text-white font-semibold py-3 rounded-lg transition-colors duration-200">
+                    Sign up
+                  </button>
+            </form>
+          </div>
+        </div>
+      </main>
+  </body>
+
+  </html>

@@ -13,6 +13,7 @@
         </a>
       </li>
       <% if(isLoggedIn) {%>
+
         <li>
           <a href="/home"
             class="<%= currentPage === 'home' ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/10 hover:text-white' %> rounded-lg px-3 py-2 text-sm font-medium transition duration-300 sm:px-4">
@@ -32,6 +33,7 @@
             Favourite
           </a>
         </li>
+
         <li>
           <a href="/host/add-home"
             class="<%= currentPage === 'add-home' ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/10 hover:text-white' %> rounded-lg px-3 py-2 text-sm font-medium transition duration-300 sm:px-4">
@@ -67,7 +69,6 @@
                     type="submit">logout</button>
                 </form>
               </li>
-
               <% } %>
     </ul>
   </div>

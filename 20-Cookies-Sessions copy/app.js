@@ -30,6 +30,7 @@ app.use(session({
 
 app.use((req, res, next) => {
   req.isLoggedIn = req.session.isLoggedIn;
+  res.locals.user = req.session.user;
   next();
 })
 
@@ -39,7 +40,7 @@ app.use(storeRouter);
 app.use("/host", (req, res, next) => {
   if (!req.isLoggedIn) {
 
-    return res.redirect("/login");
+    res.redirect("/login");
   }
   else {
     next();

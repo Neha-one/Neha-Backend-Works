@@ -1,0 +1,12 @@
+<% if (typeof errorsMessages !='undefined' && errorsMessages && errorsMessages.length>0) { %>
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div class="col-span-2 mb-3 border-l-4 border-red-500 bg-red-50 p-4 text-sm text-red-700" role="alert">
+      <ul class="list-disc list-inside text-sm text-red-500">
+        <% errorsMessages.forEach(error=> { %>
+          <li>
+            <%= error%>
+          </li>
+          <% }); %>
+      </ul>
+    </div>
+    <%}%>

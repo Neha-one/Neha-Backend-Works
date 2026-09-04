@@ -3,21 +3,37 @@
   <body>
     <%- include('../partials/navbar') %>
 
-      <main class="min-h-screen bg-gray-100 py-10">
-        <div class="max-w-xl mx-auto px-6">
-          <div class="bg-white rounded-xl shadow-lg p-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">
-              Login here....
-            </h1>
-            <form action="/login" method="POST" class="space-y-6">
-              <input type="email" placeholder="Enter your email" required name="email"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent" />
-              <input type="password" placeholder="Enter your password" required name="password"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent" />
-              <button type="submit"
-                class="w-full bg-rose-500 hover:bg-rose-600 text-white font-semibold py-3 rounded-lg transition-colors duration-200">
-                Login
-              </button>
+      <main class="relative min-h-screen overflow-hidden bg-slate-100 px-4 py-12 sm:px-6 lg:px-8">
+        <div class="relative mx-auto flex min-h-[calc(100vh-10rem)] max-w-xl items-center">
+          <div class="w-full rounded-3xl bg-white p-7 shadow-2xl shadow-slate-300/50 sm:p-12">
+            <div class="mb-8">
+              <p class="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-rose-500">stayNest</p>
+              <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+                Login here....
+              </h1>
+              <div class="mt-4 h-1 w-14 rounded-full bg-rose-500"></div>
+            </div>
+            <form action="/login" method="POST" class="space-y-5">
+
+              <%- include('../partials/errors') %>
+
+                <div>
+                  <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">Email address</label>
+                  <input id="email" type="email" placeholder="Enter your email" required name="email"
+                    value="<%= oldInput.email ? oldInput.email : "" %>"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-rose-400 focus:bg-white focus:ring-4 focus:ring-rose-100" />
+                </div>
+                <div>
+                  <label for="password" class="mb-2 block text-sm font-semibold text-slate-700">Password</label>
+                  <input id="password" type="password" placeholder="Enter your password" required name="password"
+                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-rose-400 focus:bg-white focus:ring-4 focus:ring-rose-100" />
+                </div>
+                <button type="submit"
+                  class="w-full rounded-xl bg-rose-500 py-3.5 font-semibold text-white shadow-lg shadow-rose-200 transition hover:bg-rose-600 hover:shadow-rose-300 focus:outline-none focus:ring-4 focus:ring-rose-200">
+                  Login
+                </button>
+                <p class="text-center text-sm text-slate-500">New User? <a href="/signup"
+                    class="font-semibold text-rose-500 transition hover:text-rose-600">Register</a></p>
             </form>
           </div>
         </div>

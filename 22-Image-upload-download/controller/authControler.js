@@ -1,19 +1,47 @@
-// const express = require('express');
+const express = require('express');
 const { check, validationResult } = require('express-validator');
 const User = require('../model/user');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
 
-exports.getSignup = (req, res) => {
-  res.render('auth/signup', {
-    pageTitle: "Sign Up", currentPage: "signup", isLoggedIn: false,
-    errorsMessages: [],
-    oldInput: { firstName: '', lastName: '', email: '', userType: '' },
-    user: {}
+exports.getLogin = (req, res) => {
+  res.render('auth/login', { pageTitle: "Login", currentPage: "login", isLoggedIn: false, errors: [], oldInput: { email: "" } })
+}
+
+exports.postLogin = async (req, res, next) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(422).render('auth/login', {
+      pageTitle: "Login", currentPage: "login", isLoggedIn: false,
+      errors: ['User does not exists'],
+      oldInput: { email },
+    })
+  }
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(422).render('auth/login', {
+      pageTitle: "Login", currentPage: "login", isLoggedIn: false,
+      errors: ['invalid password'],
+      oldInput: { email },
+    })
+  }
+  req.session.isLoggedIn = true;
+  req.session.user = user;
+  await req.session.save();
+  res.redirect("/");
+}
+
+exports.postLogout = (req, res, next) => {
+  req.session.destroy(() => {
+    res.redirect('/login');
   })
 }
 
-exports.postsignup = [
-  //---FIRST NAME VALIDATION---
+exports.getSignup = (req, res) => {
+  res.render('auth/signup', { pageTitle: "Sign up", currentPage: "signup", isLoggedIn: false, errors: [], oldInput: { firstName: '', lastName: '', email: '', userType: '' }, })
+}
+
+exports.postSignup = [
   check('firstName')
     // .notEmpty()
     // .withMessage('First name is required')
@@ -77,87 +105,37 @@ exports.postsignup = [
     }),
 
   (req, res, next) => {
+
     const { firstName, lastName, email, password, userType } = req.body;
-    console.log("req.body", req.body);
+
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
       return res.status(422).render('auth/signup', {
         pageTitle: "Sign Up",
         currentPage: "signup",
         isLoggedIn: false,
-        errorsMessages: errors.array().map(err => err.msg),
+        errors: errors.array().map(err => err.msg),
         oldInput: { firstName, lastName, email, userType },
-        user: {}
       })
     }
-    bcrypt.hash(password, 12).then(hashedPassword => {
-      const user = new User({ firstName, lastName, email, password: hashedPassword, userType });
-      return user.save()
-    })
-      .then(() => {
+    console.log(req.body);
+
+
+    bcrypt.hash(password, 12)
+      .then(hashedPassword => {
+        const user = new User({ firstName, lastName, email, password: hashedPassword, userType });
+        return user.save();
+      }).then(() => {
         res.redirect("/login");
-      }).catch(err => {
-        console.log(err);
+      })
+      .catch(err => {
         return res.status(422).render('auth/signup', {
           pageTitle: "Sign Up",
           currentPage: "signup",
           isLoggedIn: false,
-          errorsMessages: ['An error occurred while creating the account. Please try again later.'],
-          oldInput: { firstName, lastName, email, password, userType },
-          user: {}
+          errors: [err.message],
+          oldInput: { firstName, lastName, email, userType },
         })
       })
-  }
-];
-
-exports.getLogin = (req, res) => {
-  res.render('auth/login', {
-    pageTitle: "Login", currentPage: "login", isLoggedIn: false, oldInput: { email: '', password: '' }, errorsMessages: [],
-    user: {}
-  })
-}
-exports.postLogin = async (req, res, next) => {
-
-  const { email, password } = req.body;
-
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(422).render('auth/login', {
-      pageTitle: "Login",
-      currentPage: "login",
-      isLoggedIn: false,
-      errorsMessages: ['User does not exist'],
-      oldInput: { email, password },
-      user: {}
-    });
-  }
-
-
-  const isMatched = await bcrypt.compare(password, user.password);
-  if (!isMatched) {
-    return res.status(422).render('auth/login', {
-      pageTitle: "Login",
-      currentPage: "login",
-      isLoggedIn: false,
-      errorsMessages: ['Invalid password'],
-      oldInput: { email, password },
-      user: {}
-    });
-  }
-
-  req.session.isLoggedIn = true;
-  req.session.user = user;
-
-  console.log("LOGIN SESSION:", req.session);
-
-  await req.session.save();
-
-  console.log("AFTER SAVE:", req.session);
-
-  res.redirect("/");
-}
-exports.postLogout = (req, res, next) => {
-  req.session.destroy(() => {
-    res.redirect('/login');
-  })
-}
+  }]
