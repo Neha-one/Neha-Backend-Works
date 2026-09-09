@@ -8,5 +8,6 @@ storeRouter.get('/home/:homeId', storeController.getHomeDetails);
 storeRouter.get("/booking", storeController.getBooking)
 storeRouter.get("/favorite", storeController.getFavourite)
 storeRouter.post("/favorite", storeController.postAddFavourite)
+storeRouter.get("/rules/:homeId", storeController.getHouseRule)
 
 module.exports = { storeRouter };

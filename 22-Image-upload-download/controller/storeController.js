@@ -2,6 +2,9 @@ const express = require('express');
 const Home = require('../model/home');
 const User = require('../model/user')
 
+const path = require('path')
+const rootDir = require('../utils/path');
+
 exports.getIndex = (req, res) => {
 
   Home.find().then(addedHome => {
@@ -69,3 +72,27 @@ exports.postAddFavourite = async (req, res) => {
     res.redirect("/favorite");
   }
 }
+exports.getHouseRule = async (req, res) => {
+
+  if (!req.session.isLoggedIn) {
+    return res.redirect('/login');
+  }
+
+  try {
+    const homeId = req.params.homeId;
+
+    const home = await Home.findById(homeId);
+
+    if (!home || !home.ruleBook) {
+      return res.status(404).send("Rule book not found");
+    }
+
+    const filePath = path.join(rootDir, home.ruleBook);
+
+    res.download(filePath, "Rules.pdf");
+
+  } catch (error) {
+    console.log("Error downloading rule book:", error);
+    res.status(500).send("Error downloading rule book");
+  }
+};

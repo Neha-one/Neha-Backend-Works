@@ -48,24 +48,24 @@
                   ⭐ <%= house.rating %>
                 </p>
               </div>
+              <!-- description -->
               <div class="bg-gray-50 rounded-xl p-5">
                 <p class="text-sm text-gray-500 mb-1">Description</p>
                 <p class="text-lg font-semibold text-gray-800">
                   <%= house.description %>
                 </p>
               </div>
-
             </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
+              <!-- Back -->
+              <%- include('../partials/fav', {home: house}) %>
+            </div>
+            <div class="inline-block w-fit text-black px-2 py-2 rounded-lg font-sans  transition mt-0 mb-4">
+              <a href="/rules/<%= house.id%>"><span>download house rules</span></a>
+            </div>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-            <!-- Back -->
-            <%- include('../partials/fav', {home: house}) %>
-          </div>
-
+        </div>
       </main>
-
   </body>
-
   </html>

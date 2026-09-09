@@ -13,22 +13,31 @@ exports.getHostHome = (req, res, next) => {
 };
 
 exports.postAddHome = (req, res) => {
-  const { photo,
+
+  const {
     houseName,
     housePrice,
     location,
     rating,
     description
   } = req.body;
+  console.log(req.file);
+
+  if (!req.files.photo || !req.files.pdf) {
+    return res.status(422).send("no image");
+  }
+  const photo = req.files.photo[0].path;
+  const ruleBook = req.files.pdf[0].path;
+
   const home = new Home({
     photo,
+    ruleBook,
     houseName,
     housePrice,
     location,
     rating, description
   }
   );
-
   home.save().then(() => {
     console.log("home saved succesfully")
   }).catch((error) => {
@@ -36,8 +45,6 @@ exports.postAddHome = (req, res) => {
   });
   res.redirect('/home')
 };
-
-
 
 exports.getEditHome = (req, res) => {
   const homeId = req.params.homeId;
@@ -53,22 +60,31 @@ exports.getEditHome = (req, res) => {
   })
 }
 exports.postEditHome = (req, res) => {
-  const { photo,
+  const {
     houseName,
     housePrice,
     location,
     rating, description, id
   } = req.body;
+
   Home.findById(id).then((home) => {
     if (!home) {
       return res.redirect("/host/host-home");
     }
-    home.photo = photo;
+
     home.houseName = houseName;
     home.housePrice = housePrice;
     home.location = location;
     home.rating = rating;
     home.description = description;
+    if (req.file) {
+      fs.unlink(home.photo, (err) => {
+        if (err) {
+          console.log("Error while deleting file", err);
+        }
+      })
+      home.photo = req.file.path;
+    }
     return home.save();
   }).then((result) => {
     console.log("Home updated ", result);

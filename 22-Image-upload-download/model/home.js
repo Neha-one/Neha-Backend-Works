@@ -5,7 +5,7 @@ const homeSchema = mongoose.Schema({
   housePrice: { type: Number, required: true },
   location: { type: String, required: true },
   rating: { type: Number, required: true },
-  photo: String, description: String,
+  photo: String, description: String, ruleBook: String
 })
 
 // homeSchema.pre('findOneAndDelete', async function () {
