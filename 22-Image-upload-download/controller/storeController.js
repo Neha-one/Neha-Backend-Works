@@ -87,9 +87,9 @@ exports.getHouseRule = async (req, res) => {
       return res.status(404).send("Rule book not found");
     }
 
-    const filePath = path.join(rootDir, home.ruleBook);
+    const filePath = home.ruleBook;
 
-    res.download(filePath, "Rules.pdf");
+    res.download(filePath, "House-Rules.pdf");
 
   } catch (error) {
     console.log("Error downloading rule book:", error);

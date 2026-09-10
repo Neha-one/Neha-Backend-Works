@@ -31,9 +31,10 @@ const randomString = (length) => {
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === 'photo') {
-      cb(null, 'uploads/');
-    } else if (file.fieldname === 'pdf') {
-      cb(null, 'houseRule/');
+      cb(null, path.join(rootDir, 'uploads'));
+    }
+    else if (file.fieldname === 'pdf') {
+      cb(null, path.join(rootDir, 'houseRule'));
     }
   },
 
@@ -41,7 +42,6 @@ const storage = multer.diskStorage({
     cb(null, randomString(10) + '-' + file.originalname);
   }
 });
-
 const fileFilter = (req, file, cb) => {
   if (file.fieldname === 'photo') {
     if (

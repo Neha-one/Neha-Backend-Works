@@ -1,5 +1,6 @@
 const express = require('express');
 const Home = require('../model/home');
+const fs = require('fs');
 
 exports.getAddHome = (req, res) => {
   res.render("host/edit-home", { pageTitle: "add-home", currentPage: "add-home", editing: false, isLoggedIn: req.isLoggedIn });
@@ -21,7 +22,7 @@ exports.postAddHome = (req, res) => {
     rating,
     description
   } = req.body;
-  console.log(req.file);
+  // console.log(req.files);
 
   if (!req.files.photo || !req.files.pdf) {
     return res.status(422).send("no image");
@@ -40,10 +41,10 @@ exports.postAddHome = (req, res) => {
   );
   home.save().then(() => {
     console.log("home saved succesfully")
+    res.redirect('/home');
   }).catch((error) => {
     console.log("Error adding home", error)
   });
-  res.redirect('/home')
 };
 
 exports.getEditHome = (req, res) => {
@@ -64,8 +65,12 @@ exports.postEditHome = (req, res) => {
     houseName,
     housePrice,
     location,
-    rating, description, id
+    rating,
+    description,
+    id
   } = req.body;
+
+  console.log("FILES:", req.files);
 
   Home.findById(id).then((home) => {
     if (!home) {
@@ -77,23 +82,47 @@ exports.postEditHome = (req, res) => {
     home.location = location;
     home.rating = rating;
     home.description = description;
-    if (req.file) {
-      fs.unlink(home.photo, (err) => {
-        if (err) {
-          console.log("Error while deleting file", err);
-        }
-      })
-      home.photo = req.file.path;
-    }
-    return home.save();
-  }).then((result) => {
-    console.log("Home updated ", result);
-    res.redirect('/host/host-home');
-  }).catch(err => {
-    console.log("Error while updating", err);
-  })
-}
 
+    // New photo
+    if (req.files && req.files.photo) {
+      console.log("New photo:", req.files.photo[0].path);
+
+      if (home.photo) {
+        fs.unlink(home.photo, (err) => {
+          if (err) {
+            console.log("Old photo delete error:", err.message);
+          }
+        });
+      }
+
+      home.photo = req.files.photo[0].path;
+    }
+
+    // New PDF
+    if (req.files && req.files.pdf) {
+      console.log("New PDF:", req.files.pdf[0].path);
+
+      if (home.ruleBook) {
+        fs.unlink(home.ruleBook, (err) => {
+          if (err) {
+            console.log("Old PDF delete error:", err.message);
+          }
+        });
+      }
+
+      home.ruleBook = req.files.pdf[0].path;
+    }
+
+    return home.save();
+
+  }).then(() => {
+    console.log("Home updated successfully");
+    res.redirect('/host/host-home');
+
+  }).catch(err => {
+    console.log("Error while updating:", err);
+  });
+};
 exports.postDeleteHome = (req, res) => {
   const homeId = req.params.homeId;
   console.log("Deleting ID:", homeId);
